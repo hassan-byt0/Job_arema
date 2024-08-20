@@ -1,0 +1,7 @@
+fastapi
+uvicorn
+sentence-transformers
+pinecone-client
+langchain-groq
+langchain
+pydantic_settings

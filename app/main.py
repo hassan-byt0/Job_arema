@@ -2,8 +2,24 @@ from fastapi import FastAPI, Query
 from .services import router as search_router
 import json
 from .rag import perform_rag_pipeline
+from fastapi.middleware.cors import CORSMiddleware 
 
 app = FastAPI()
+
+# Configure CORS
+origins = [
+    "http://localhost",
+    "http://localhost:3000 ",
+    "https://app.joinarena.ai",  
+]
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,  # Allows the origins specified above
+    allow_credentials=True,  # Allows cookies to be sent in requests
+    allow_methods=["*"],  # Allows all HTTP methods (GET, POST, etc.)
+    allow_headers=["*"],  # Allows all headers
+)
 
 app.include_router(search_router, prefix="/api")
 

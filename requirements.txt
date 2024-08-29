@@ -5,3 +5,4 @@ pinecone-client
 langchain-groq
 langchain
 pydantic_settings
+python-dotenv

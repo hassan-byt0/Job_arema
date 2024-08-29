@@ -5,14 +5,19 @@ from langchain import LLMChain, PromptTemplate
 from langchain_groq import ChatGroq
 from pinecone import Pinecone, ServerlessSpec
 from .config import settings
+from dotenv import load_dotenv
 
+# Load environment variables from .env file
+load_dotenv()
+api_key = os.getenv("GROQ_API_KEY")
 # Initialize Pinecone and embedding model
 pc = Pinecone(api_key=settings.pinecone_api_key)
 index = pc.Index(settings.index_name)
 model = SentenceTransformer(settings.model_name)
-os.environ["GROQ_API_KEY"] = "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"
+#os.environ["GROQ_API_KEY"] = "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"
+
 # Initialize Groq LLM
-groq_llm = ChatGroq(temperature=0, api_key=os.environ["GROQ_API_KEY"], model_name="mixtral-8x7b-32768")
+groq_llm = ChatGroq(temperature=0, api_key=api_key, model_name="mixtral-8x7b-32768")
 
 # Define the prompt template for explanation generation
 prompt_template = PromptTemplate(
